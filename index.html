@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<title>Hangman Game</title>
+</head>
+<body>
+<header><h1>The Psychic Game!</h1></header>
+<div><h2>Guess what letter I'm thinking of</h2></div>
+<div id="wins"></div>
+<div id="losses"></div>
+<div id="guessesLeft"></div>
+<div id="guesses"></div>
+<script type="text/javascript">
+		var possible = "abcdefghijklmnopqrstuvwxyz";
+		var compG = possible.charAt(Math.floor(Math.random() * possible.length));
+		var gS = "";
+		var ls = 0;
+		var ws = 0;
+		var gL = 9;
+		$("#wins").html("Wins: " + ws);
+		$("#losses").html("Losses: " + ls);
+		$("#guessesLeft").html("Guesses Left: " + gL);
+		$("#guesses").html("Guesses: " + gS);
+
+		document.onkeyup = function(event){
+      		var input = String.fromCharCode(event.keyCode).toLowerCase();
+       		if (input === compG) {
+      			gL = 9;
+      			ws++;
+      			gS = "";
+      		}
+      		if (input !== compG) {
+      			gL--;
+      			gS += input;
+      			if (gL === 0) {
+      				gL = 9;
+      				ls++;
+      				gS = "";
+      			}
+      		}
+      		$("#wins").html("Wins: " + ws);
+			$("#losses").html("Losses: " + ls);
+			$("#guessesLeft").html("Guesses Left: " + gL);
+			$("#guesses").html("Guesses: " + gS);
+      }
+</script>
+
+</body>
+</html>
